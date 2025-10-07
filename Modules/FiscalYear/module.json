@@ -1,0 +1,11 @@
+{
+    "name": "FiscalYear",
+    "alias": "fiscalyear",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\FiscalYear\\Providers\\FiscalYearServiceProvider"
+    ],
+    "files": []
+}

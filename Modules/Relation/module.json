@@ -1,0 +1,11 @@
+{
+    "name": "Relation",
+    "alias": "relation",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\Relation\\Providers\\RelationServiceProvider"
+    ],
+    "files": []
+}

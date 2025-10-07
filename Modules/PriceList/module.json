@@ -1,0 +1,11 @@
+{
+    "name": "PriceList",
+    "alias": "pricelist",
+    "description": "",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\PriceList\\Providers\\PriceListServiceProvider"
+    ],
+    "files": []
+}

@@ -1,0 +1,1 @@
+<x-dashboard::admin.layout.master></x-dashboard::admin.layout.master>

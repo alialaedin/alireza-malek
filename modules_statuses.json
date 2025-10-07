@@ -1,0 +1,22 @@
+{
+    "Area": true,
+    "Admin": true,
+    "Core": true,
+    "Dashboard": true,
+    "Auth": true,
+    "Sms": true,
+    "Company": true,
+    "Employee": true,
+    "Position": true,
+    "Language": true,
+    "FiscalYear": true,
+    "Contract": true,
+    "PriceList": true,
+    "Relation": true,
+    "Account": true,
+    "Job": true,
+    "Profile": true,
+    "Wallet": true,
+    "Setting": true,
+    "Accounting": true
+}
