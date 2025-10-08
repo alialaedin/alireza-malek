@@ -2,14 +2,12 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Enums\GuardName;
-use Modules\Company\Http\Controllers\Admin\LegalCompanyController;
-use Modules\Company\Http\Controllers\Admin\RealCompanyController;
+use Modules\Company\Http\Controllers\Admin\CompanyController;
 use Modules\Company\Http\Controllers\Company\FinanceController;
 use Modules\Company\Http\Controllers\Company\WorkplaceController;
 
 Route::superGroup(GuardName::ADMIN, function () {
-	Route::resource('/real-companies', RealCompanyController::class);
-	Route::resource('/legal-companies', LegalCompanyController::class);
+	Route::resource('/companies', CompanyController::class);
 });
 
 Route::superGroup(GuardName::COMPANY, function () {

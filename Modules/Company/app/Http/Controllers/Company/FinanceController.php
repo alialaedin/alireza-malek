@@ -2,6 +2,7 @@
 
 namespace Modules\Company\Http\Controllers\Company;
 
+use Modules\Activity\Classes\ActivityLog;
 use Modules\Company\Http\Requests\Company\Finance\FinanceStoreRequest;
 use Modules\Company\Http\Requests\Company\Finance\FinanceUpdateRequest;
 use Modules\Company\Models\Finance;

@@ -40,12 +40,9 @@ return [
     'route' => 'admin.wallet-transactions.index'
   ],
   [
-    'title' => 'مدیریت اشخاص',
+    'title' => 'مدیریت شرکت ها',
     'icon' => 'ti-harddrives',
-    'children' => [
-      ['title' => 'اشخاص حقیقی', 'route' => 'admin.real-companies.index'],
-      ['title' => 'اشخاص حقوقی', 'route' => 'admin.legal-companies.index']
-    ]
+    'route' => 'admin.companies.index'
   ],
   [
     'title' => 'قرارداد ها',
@@ -65,5 +62,10 @@ return [
     'title' => 'تنظیمات',
     'icon' => 'ti-settings',
     'route' => 'admin.settings.index'
+  ],
+  [
+    'title' => 'لاگ فعالیت ها',
+    'icon' => 'ti-pulse',
+    'route' => 'admin.activities.index'
   ],
 ];

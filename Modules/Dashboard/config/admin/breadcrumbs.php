@@ -74,40 +74,22 @@ return [
     ],
   ],
 
-  'real-companies' => [
+  'companies' => [
     'index' => [
-      ['title' => 'شرکت های حقیقی']
+      ['title' => 'مدیریت شرکت ها']
     ],
     'create' => [
-      ['title' => 'شرکت های حقیقی', 'route' => 'admin.real-companies.index'],
-      ['title' => 'ثبت شرکت حقیقی جدید'],
+      ['title' => 'مدیریت شرکت ها', 'route' => 'admin.companies.index'],
+      ['title' => 'ثبت شرکت جدید'],
     ],
     'edit' => [
-      ['title' => 'شرکت های حقیقی', 'route' => 'admin.real-companies.index'],
-      ['title' => 'ویرایش شرکت حقیقی'],
+      ['title' => 'مدیریت شرکت ها', 'route' => 'admin.companies.index'],
+      ['title' => 'ویرایش شرکت'],
     ],
     'show' => [
-      ['title' => 'شرکت های حقیقی', 'route' => 'admin.real-companies.index'],
-      ['title' => 'نمایش شرکت حقیقی'],
+      ['title' => 'مدیریت شرکت ها', 'route' => 'admin.companies.index'],
+      ['title' => 'نمایش شرکت'],
     ],
-  ],
-
-  'legal-companies' => [
-    'index' => [
-      ['title' => 'شرکت های حقوقی']
-    ],
-    'create' => [
-      ['title' => 'شرکت های حقوقی', 'route' => 'admin.legal-companies.index'],
-      ['title' => 'ثبت شرکت حقوقی جدید'],
-    ],
-    'edit' => [
-      ['title' => 'شرکت های حقوقی', 'route' => 'admin.legal-companies.index'],
-      ['title' => 'ویرایش شرکت حقوقی'],
-    ],
-    'show' => [
-      ['title' => 'شرکت های حقوقی', 'route' => 'admin.legal-companies.index'],
-      ['title' => 'نمایش شرکت حقوقی'],
-    ]
   ],
 
   'contract-companies' => [

@@ -11,4 +11,9 @@ use Spatie\MediaLibrary\InteractsWithMedia;
 class BaseAuthMediaModel extends Authenticatable implements HasMedia
 {
   use BaseModelTrait, InteractsWithMedia, HasFile;
+
+  public function registerMediaCollections(): void
+  {
+    $this->registerCustomMediaCollections();
+  }
 }

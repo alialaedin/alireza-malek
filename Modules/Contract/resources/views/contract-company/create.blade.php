@@ -14,8 +14,8 @@
             <select name="company_id" id="company-id" class="form-control fs-12">
               <option value=""></option>
               @foreach ($companies as $company)
-                <option value="{{ $company->id }}" @selected(old('company_id') == $company->id)>
-                  {{ $company->getName() . ' - ' . $company->getMobile() }}
+                <option value="{{ $company['id'] }}" @selected(old('company_id') == $company['id'])>
+                  {{ $company['title'] }}
                 </option>
               @endforeach
             </select>

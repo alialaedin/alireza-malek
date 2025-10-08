@@ -3,6 +3,7 @@
 namespace Modules\Company\Enums;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 
 enum ActivityLicense: string
 {
@@ -30,13 +31,15 @@ enum ActivityLicense: string
 
   public static function getCasesWithLabel(): array
   {
-    return Arr::map(
-      self::cases(),
-      fn(self $license) =>
-      [
-        'name' => $license->value,
-        'label' => $license->label()
-      ]
-    );
+    return Cache::rememberForever('all_activity_linceses', function () {
+      return Arr::map(
+        self::cases(),
+        fn(self $license) =>
+        [
+          'name' => $license->value,
+          'label' => $license->label()
+        ]
+      );
+    });
   }
 }

@@ -20,7 +20,7 @@ class ContractCompanyController extends Controller
       ->select(['id', 'company_id', 'contract_number', 'start_date', 'end_date', 'subject', 'status', 'created_at'])
       ->latest()
       ->filters()
-      ->with('company:id,type')
+      ->with('company:id,type,name,mobile')
       ->paginateWithQueryString();
 
     return view('contract::contract-company.index', compact(['contracts', 'filters']));
@@ -28,7 +28,7 @@ class ContractCompanyController extends Controller
 
   public function create(CompanyType $type)
   {
-    $companies = Company::query()->select(['id', 'type'])->{$type->value}()->latest('id')->get();
+    $companies = Company::getAllCompanies()->filter(fn(array $c) => $c['type'] == $type->label());
     $statuses = ContractStatus::getCasesWithLabel();
 
     return view('contract::contract-company.create', compact(['companies', 'statuses']));
@@ -49,6 +49,7 @@ class ContractCompanyController extends Controller
 
   public function edit(ContractCompany $contractCompany)
   {
+    $contractCompany->load('company:id,name,mobile');
     $statuses = ContractStatus::getCasesWithLabel();
 
     return view('contract::contract-company.edit', compact(['statuses', 'contractCompany']));

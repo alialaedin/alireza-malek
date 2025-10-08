@@ -16,7 +16,6 @@ return new class extends Migration
 			$table->morphs('holder');
 			$table->unsignedBigInteger('main_balance');
 			$table->unsignedBigInteger('gift_balance');
-			$table->unsignedBigInteger('balance')->storedAs('main_balance + gift_balance');
 			$table->timestamps();
 		});
 	}

@@ -35,8 +35,8 @@
         @forelse ($contracts as $contract)
           <tr>
             <td class="font-weight-bold">{{ $loop->iteration }}</td>
-            <td>{{ $contract->companyInfo['name'] }}</td>
-            <td>{{ $contract->companyInfo['mobile'] }}</td>
+            <td>{{ $contract->company->name }}</td>
+            <td>{{ $contract->company->mobile }}</td>
 
             <td>{{ $contract->contract_number }}</td>
             <td>{{ $contract->subject }}</td>

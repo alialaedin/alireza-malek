@@ -18,5 +18,6 @@
     "Profile": true,
     "Wallet": true,
     "Setting": true,
-    "Accounting": true
+    "Accounting": true,
+    "Activity": true
 }

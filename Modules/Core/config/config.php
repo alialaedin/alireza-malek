@@ -40,6 +40,12 @@ return [
       'placeholder' => 'عنوان را اینجا وارد کنید',
       'operator' => 'like',
     ],
+    'username' => [
+      'column' => 'username',
+      'type' => 'text',
+      'placeholder' => 'نام کاربری را اینجا وارد کنید',
+      'operator' => 'like',
+    ],
     'description' => [
       'column' => 'description',
       'type' => 'text',
@@ -51,6 +57,18 @@ return [
       'type' => 'text',
       'placeholder' => 'شماره موبایل را اینجا وارد کنید',
       'operator' => 'like',
+    ],
+    'national_code' => [
+      'column' => 'national_code',
+      'type' => 'text',
+      'placeholder' => 'کد ملی را اینجا وارد کنید',
+      'operator' => '=',
+    ],
+    'workshop_code' => [
+      'column' => 'workshop_code',
+      'type' => 'text',
+      'placeholder' => 'کد کارگاه را اینجا وارد کنید',
+      'operator' => '=',
     ],
     'subject' => [
       'column' => 'subject',

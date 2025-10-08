@@ -6,13 +6,14 @@ use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Modules\Account\Models\Account;
 use Modules\Company\Enums\CompanyType;
-use Modules\Company\Enums\ContractStatus;
 use Modules\Contract\Models\ContractCompany;
-use Modules\Core\Models\BaseAuthModel;
+use Modules\Core\Models\BaseAuthMediaModel;
+use Modules\Core\Traits\Filterable;
 use Modules\Core\Traits\HasCache;
 use Modules\Employee\Models\EmploymentForm;
 use Modules\Job\Models\CompanyJob;
@@ -20,36 +21,55 @@ use Modules\PriceList\Models\PriceList;
 use Modules\Relation\Models\Relation;
 use Modules\Wallet\Traits\HasWallet;
 
-class Company extends BaseAuthModel
+class Company extends BaseAuthMediaModel
 {
-  use HasCache, HasWallet;
+  use HasCache, HasWallet, Filterable;
 
-  protected $fillable = ['username', 'password', 'remember_token', 'type', 'login_status', 'contract_status'];
+  public const ACCEPTED_IMAGE_MIMES = 'png,jpg,jpeg,webp';
+  public const MAX_FILE_SIZE = '1024';
+
+  protected $fillable = [
+    'username',
+    'password',
+    'type',
+    'login_status',
+    'name',
+    'mobile',
+    'national_code',
+    'address',
+    'activity_license',
+    'brand',
+    'workshop_code'
+  ];
+
   protected $hidden = ['password', 'remember_token'];
-  protected $appends = ['information'];
+  protected $casts = ['type' => CompanyType::class];
   protected array $cacheKeys = ['all_companies'];
+  protected array $collectionNames = ['company_logos' => 'logo'];
+  protected static array $filterColumns = ['username', 'type', 'name', 'mobile', 'national_code', 'workshop_code', 'from_date', 'to_date'];
 
-  protected $attributes = [
-    'contract_status' => ContractStatus::ON_HOLD,
-    'login_status' => 1
-  ];
+  public static function getFilterInputs(): array
+  {
+    $filters = Arr::only(config('core.filters'), self::$filterColumns);
 
-  protected $casts = [
-    'type' => CompanyType::class,
-    'contract_status' => ContractStatus::class,
-  ];
+    $filters['name']['placeholder'] = 'نام را اینجا وارد کنید';
+    $filters['type']['placeholder'] = 'نوع شرکت را انتخاب کنید';
+    $filters['type']['options'] = collect(CompanyType::getCasesWithLabel())->pluck('label', 'name');
+
+    return $filters;
+  }
 
   public static function getAllCompanies(): Collection
   {
     return Cache::rememberForever('all_companies', function () {
       return self::query()
-        ->select(['id', 'type'])
+        ->select(['id', 'type', 'name', 'mobile'])
         ->latest('id')
         ->get()
         ->map(fn(self $company) => [
           'id' => $company->id,
           'type' => $company->type->label(),
-          'title' => $company->getName() . ' - ' . $company->getMobile(),
+          'title' => $company->name . ' - ' . $company->mobile,
         ]);
     });
   }
@@ -73,16 +93,6 @@ class Company extends BaseAuthModel
     );
   }
 
-  protected function information(): Attribute
-  {
-    return Attribute::make(
-      get: fn(): RealCompanyInformation|LegalCompanyInformation => match ($this->type) {
-        CompanyType::REAL => $this->hasOne(RealCompanyInformation::class, 'company_id')->first(),
-        CompanyType::LEGAL => $this->hasOne(LegalCompanyInformation::class, 'company_id')->first(),
-      }
-    );
-  }
-
   protected function holderName(): Attribute
   {
     return Attribute::make(
@@ -95,16 +105,6 @@ class Company extends BaseAuthModel
     return Attribute::make(
       get: fn(): string => $this->getMobile()
     );
-  }
-
-  public function getName(): string
-  {
-    return $this->information->company_name ?? $this->information->full_name;
-  }
-
-  public function getMobile(): string
-  {
-    return $this->information->managment_mobile ?? $this->information->mobile;
   }
 
   public function signatureOwners(): HasMany

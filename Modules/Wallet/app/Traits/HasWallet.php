@@ -18,14 +18,9 @@ trait HasWallet
     static::created(function (Model $model) {
       Wallet::create([
         'holder_id' => $model->id,
-        'holder_type' => $model,
+        'holder_type' => $model::class,
       ]);
     });
-  }
-
-  public function initializeHasWallet(): void
-  {
-    $this->append('balance');
   }
 
   protected function balance(): Attribute
