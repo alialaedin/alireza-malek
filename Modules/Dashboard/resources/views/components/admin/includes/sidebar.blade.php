@@ -39,7 +39,7 @@
         <!-- Logout Menu Item -->
         <a href="#" class="side-menu__item"
           onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-          <i class="fe fe-log-out sidemenu_icon"></i>
+          <i class="fe fe-power sidemenu_icon"></i>
           <span class="side-menu__label">خروج از حساب</span>
         </a>
         <!-- Hidden Logout Form -->

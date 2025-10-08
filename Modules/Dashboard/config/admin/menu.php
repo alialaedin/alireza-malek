@@ -66,6 +66,10 @@ return [
   [
     'title' => 'لاگ فعالیت ها',
     'icon' => 'ti-pulse',
-    'route' => 'admin.activities.index'
+    'children' => [
+      ['title' => 'ادمین', 'route' => 'admin.admin-activities'],
+      ['title' => 'شرکت ها', 'route' => 'admin.company-activities'],
+      ['title' => 'کارمندان', 'route' => 'admin.employee-activities'],
+    ]
   ],
 ];

@@ -19,5 +19,6 @@
     "Wallet": true,
     "Setting": true,
     "Accounting": true,
-    "Activity": true
+    "Activity": true,
+    "Campaign": true
 }
