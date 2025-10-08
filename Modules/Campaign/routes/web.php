@@ -1,8 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Modules\Campaign\Http\Controllers\CampaignController;
+use Modules\Auth\Enums\GuardName;
+use Modules\Campaign\Http\Controllers\Admin\CampaignController;
 
-Route::middleware(['auth', 'verified'])->group(function () {
-    Route::resource('campaigns', CampaignController::class)->names('campaign');
+Route::superGroup(GuardName::ADMIN, function () {
+  Route::resource('/campaigns', CampaignController::class);
 });

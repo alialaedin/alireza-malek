@@ -92,6 +92,24 @@ return [
     ],
   ],
 
+  'campaigns' => [
+    'index' => [
+      ['title' => 'مدیریت کمپین ها']
+    ],
+    'create' => [
+      ['title' => 'مدیریت کمپین ها', 'route' => 'admin.campaigns.index'],
+      ['title' => 'ثبت کمپین جدید'],
+    ],
+    'edit' => [
+      ['title' => 'مدیریت کمپین ها', 'route' => 'admin.campaigns.index'],
+      ['title' => 'ویرایش کمپین'],
+    ],
+    'show' => [
+      ['title' => 'مدیریت کمپین ها', 'route' => 'admin.campaigns.index'],
+      ['title' => 'نمایش کمپین'],
+    ],
+  ],
+
   'contract-companies' => [
     'index' => [
       ['title' => 'قرارداد ها']

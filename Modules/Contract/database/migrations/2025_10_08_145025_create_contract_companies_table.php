@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Modules\Campaign\Models\Campaign;
 use Modules\Company\Models\Company;
 use Modules\Contract\Enums\ContractStatus;
 
@@ -16,6 +17,7 @@ return new class extends Migration
 		Schema::create('contract_companies', function (Blueprint $table) {
 			$table->id();
 			$table->foreignIdFor(Company::class)->constrained()->cascadeOnDelete();
+			$table->foreignIdFor(Campaign::class)->nullable()->constrained()->cascadeOnDelete();
 			$table->string('contract_number', 50)->unique();
 			$table->string('subject', 100);
 			$table->date('start_date');

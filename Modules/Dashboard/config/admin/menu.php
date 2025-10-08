@@ -45,6 +45,11 @@ return [
     'route' => 'admin.companies.index'
   ],
   [
+    'title' => 'کمپین ها',
+    'icon' => 'ti-announcement',
+    'route' => 'admin.campaigns.index'
+  ],
+  [
     'title' => 'قرارداد ها',
     'icon' => 'ti-files',
     'route' => 'admin.contract-companies.index'

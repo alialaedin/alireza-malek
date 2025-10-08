@@ -1,5 +1,7 @@
 <?php
 
+use Modules\Campaign\Enums\CampaignDiscountType;
+
 return [
   'name' => 'Core',
 
@@ -90,6 +92,13 @@ return [
         'on' => 'فعال',
         'off' => 'غیرفعال',
       ],
+      'operator' => '=',
+    ],
+    'discount_type' => [
+      'column' => 'discount_type',
+      'type' => 'select',
+      'placeholder' => 'نوع تخفیف را انتخاب کنید',
+      'options' => collect(CampaignDiscountType::getCasesWithLabel())->pluck('label', 'name'),
       'operator' => '=',
     ],
     'has_seen' => [
