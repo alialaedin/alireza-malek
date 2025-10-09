@@ -4,6 +4,7 @@ namespace Modules\Contract\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Modules\Campaign\Services\CampaignValidationService;
 use Modules\Core\Helpers\Helpers;
 
 class ContractCompanyUpdateRequest extends FormRequest
@@ -27,9 +28,15 @@ class ContractCompanyUpdateRequest extends FormRequest
     ];
   }
 
-  /**
-   * Determine if the user is authorized to make this request.
-   */
+  protected function passedValidation(): void
+  {
+    $contract = $this->route('contract_company');
+
+    if ($this->filled('campaign_id') && $contract->campaign_id != $this->campaign_id) {
+      CampaignValidationService::validate($this->campaign_id);
+    }
+  }
+
   public function authorize(): bool
   {
     return true;

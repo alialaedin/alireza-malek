@@ -4,6 +4,7 @@ namespace Modules\Contract\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
+use Modules\Campaign\Services\CampaignValidationService;
 use Modules\Contract\Enums\ContractStatus;
 use Modules\Contract\Models\ContractCompany;
 use Modules\Core\Helpers\Helpers;
@@ -22,6 +23,7 @@ class ContractCompanyStoreRequest extends FormRequest
   {
     return [
       'company_id' => ['required', 'integer', 'exists:companies,id'],
+      'campaign_id' => ['nullable', 'integer', 'exists:campaigns,id'],
       'contract_number' => ['required', 'integer', 'unique:contract_companies,contract_number'],
       'subject' => ['required', 'string', 'max:190'],
       'payment_amount' => ['required', 'numeric', 'min:0'],
@@ -38,9 +40,13 @@ class ContractCompanyStoreRequest extends FormRequest
     ];
   }
 
-  /**
-   * Determine if the user is authorized to make this request.
-   */
+  protected function passedValidation()
+  {
+    if ($this->filled('campaign_id')) {
+      CampaignValidationService::validate($this->campaign_id);
+    }
+  }
+
   public function authorize(): bool
   {
     return true;

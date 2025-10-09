@@ -3,7 +3,7 @@
 return [
   [
     'title' => 'داشبورد',
-    'icon' => 'ti-dashboard',
+    'icon' => 'fa fa-dashboard',
     'route' => 'admin.dashboard'
   ],
   [

@@ -3,6 +3,7 @@
 namespace Modules\Contract\Enums;
 
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Cache;
 
 enum ContractStatus: string
 {
@@ -33,13 +34,13 @@ enum ContractStatus: string
 
   public static function getCasesWithLabel(): array
   {
-    return Arr::map(
-      self::cases(),
-      fn(self $status) =>
-      [
-        'name' => $status->value,
-        'label' => $status->label()
-      ]
-    );
+    return Cache::rememberForever('all_contract_statuses', function () {
+      return Arr::map(self::cases(), function (self $status) {
+        return [
+          'name' => $status->value,
+          'label' => $status->label()
+        ];
+      });
+    });
   }
 }

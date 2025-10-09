@@ -20,13 +20,6 @@
 
         <div class="col-xl-3">
           <x-form-group>
-            <x-label :is-required="true" text="شماره قرارداد" />
-            <x-input type="text" name="contract_number" :default-value="$contractCompany->contract_number" />
-          </x-form-group>
-        </div>
-
-        <div class="col-xl-3">
-          <x-form-group>
             <x-label :is-required="true" text="موضوع قرارداد" />
             <x-input type="text" name="subject" :default-value="$contractCompany->subject" />
           </x-form-group>
@@ -37,6 +30,20 @@
             <x-label :is-required="true" text="مبلغ قرارداد (تومان)" />
             <x-input type="text" name="payment_amount" class="comma"
               :default-value="number_format($contractCompany->payment_amount)" />
+          </x-form-group>
+        </div>
+
+        <div class="col-xl-3">
+          <x-form-group>
+            <x-label text="انتخاب کمپین" />
+            <select name="campaign_id" id="campaign-id" class="form-control fs-12">
+              <option value=""></option>
+              @foreach ($campaigns as $campaign)
+                <option value="{{ $campaign->id }}" @selected(old('campaign_id', $contractCompany->campaign_id) == $campaign->id)>
+                  {{ $campaign->title }}
+                </option>
+              @endforeach
+            </select>
           </x-form-group>
         </div>
 
@@ -56,15 +63,8 @@
 
         <div class="col-xl-3">
           <x-form-group>
-            <x-label :is-required="true" text="وضعییت" />
-            <select name="status" id="status" class="form-control fs-12">
-              <option value=""></option>
-              @foreach ($statuses as $status)
-                <option value="{{ $status['name'] }}" @selected(old('status', $contractCompany->status->value) == $status['name'])>
-                  {{ $status['label'] }}
-                </option>
-              @endforeach
-            </select>
+            <x-label :is-required="true" text="شماره قرارداد" />
+            <x-input type="text" name="contract_number" :default-value="$contractCompany->contract_number" />
           </x-form-group>
         </div>
 
@@ -103,6 +103,20 @@
             <x-label text="تاریخ امضا توسط ادمین" />
             <x-date-input id="signature-date-webmaster" name="signature_date_webmaster"
               :default-value="$contractCompany->signature_date_webmaster" />
+          </x-form-group>
+        </div>
+
+        <div class="col-xl-3">
+          <x-form-group>
+            <x-label :is-required="true" text="وضعییت" />
+            <select name="status" id="status" class="form-control fs-12">
+              <option value=""></option>
+              @foreach ($statuses as $status)
+                <option value="{{ $status['name'] }}" @selected(old('status', $contractCompany->status->value) == $status['name'])>
+                  {{ $status['label'] }}
+                </option>
+              @endforeach
+            </select>
           </x-form-group>
         </div>
 

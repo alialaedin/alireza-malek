@@ -10,6 +10,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 use Modules\Account\Models\Account;
+use Modules\Company\Enums\ActivityLicense;
 use Modules\Company\Enums\CompanyType;
 use Modules\Contract\Models\ContractCompany;
 use Modules\Core\Models\BaseAuthMediaModel;
@@ -43,7 +44,10 @@ class Company extends BaseAuthMediaModel
   ];
 
   protected $hidden = ['password', 'remember_token'];
-  protected $casts = ['type' => CompanyType::class];
+  protected $casts = [
+    'type' => CompanyType::class,
+    'activity_license' => ActivityLicense::class
+  ];
   protected array $cacheKeys = ['all_companies'];
   protected array $collectionNames = ['company_logos' => 'logo'];
   protected static array $filterColumns = ['username', 'type', 'name', 'mobile', 'national_code', 'workshop_code', 'from_date', 'to_date'];

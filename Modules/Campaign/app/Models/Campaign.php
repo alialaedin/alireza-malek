@@ -33,7 +33,7 @@ class Campaign extends BaseModel
 	protected $casts = ['discount_type' => CampaignDiscountType::class];
 	protected $attributes = ['used_count' => 0];
 	protected $appends = ['is_expired'];
-	protected $cacheKeys = ['active_campaings'];
+	protected $cacheKeys = ['active_campaigns'];
 	protected $relationsPreventingDeletion = ['contractCompanies' => 'به دلیل استفاده در قرارداد قابل حذف نمی باشد'];
 	protected static $filterColumns = ['title', 'discount_type', 'from_date', 'to_date'];
 
@@ -62,6 +62,16 @@ class Campaign extends BaseModel
 		return Attribute::make(
 			get: fn(): bool => Carbon::now()->gt($this->end_date)
 		);
+	}
+
+	public function use(): void
+	{
+		$this->increment('used_count');
+	}
+
+	public function disuse(): void
+	{
+		$this->decrement('used_count');
 	}
 
 	public function contractCompanies(): HasMany

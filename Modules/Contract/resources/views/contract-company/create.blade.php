@@ -24,13 +24,6 @@
 
         <div class="col-xl-3">
           <x-form-group>
-            <x-label :is-required="true" text="شماره قرارداد" />
-            <x-input type="text" name="contract_number" />
-          </x-form-group>
-        </div>
-
-        <div class="col-xl-3">
-          <x-form-group>
             <x-label :is-required="true" text="موضوع قرارداد" />
             <x-input type="text" name="subject" />
           </x-form-group>
@@ -40,6 +33,20 @@
           <x-form-group>
             <x-label :is-required="true" text="مبلغ قرارداد (تومان)" />
             <x-input type="text" name="payment_terms" class="comma" />
+          </x-form-group>
+        </div>
+
+        <div class="col-xl-3">
+          <x-form-group>
+            <x-label text="انتخاب کمپین" />
+            <select name="campaign_id" id="campaign-id" class="form-control fs-12">
+              <option value=""></option>
+              @foreach ($campaigns as $campaign)
+                <option value="{{ $campaign->id }}" @selected(old('campaign_id') == $campaign->id)>
+                  {{ $campaign->title }}
+                </option>
+              @endforeach
+            </select>
           </x-form-group>
         </div>
 
@@ -59,15 +66,8 @@
 
         <div class="col-xl-3">
           <x-form-group>
-            <x-label :is-required="true" text="وضعییت" />
-            <select name="status" id="status" class="form-control fs-12">
-              <option value=""></option>
-              @foreach ($statuses as $status)
-                <option value="{{ $status['name'] }}" @selected(old('status') == $status['name'])>
-                  {{ $status['label'] }}
-                </option>
-              @endforeach
-            </select>
+            <x-label :is-required="true" text="شماره قرارداد" />
+            <x-input type="text" name="contract_number" />
           </x-form-group>
         </div>
 
@@ -106,6 +106,20 @@
           </x-form-group>
         </div>
 
+        <div class="col-xl-3">
+          <x-form-group>
+            <x-label :is-required="true" text="وضعییت" />
+            <select name="status" id="status" class="form-control fs-12">
+              <option value=""></option>
+              @foreach ($statuses as $status)
+                <option value="{{ $status['name'] }}" @selected(old('status') == $status['name'])>
+                  {{ $status['label'] }}
+                </option>
+              @endforeach
+            </select>
+          </x-form-group>
+        </div>
+
         <x-col lg="6" xl="3">
           <x-form-group>
             <x-label text="فایل قرارداد" />
@@ -128,6 +142,7 @@
     @stack('dateInputScriptStack')
     <script>
       new CustomSelect('#company-id', 'یرای انتخاب شرکت کلیلک کنید');
+      new CustomSelect('#campaign-id', 'یرای انتخاب کمپین کلیلک کنید');
       new CustomSelect('#status', 'یرای انتخاب وضعیت کلیلک کنید');
     </script>
   @endpush
