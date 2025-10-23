@@ -3,12 +3,8 @@
 namespace Modules\Employee\Providers;
 
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
-use Modules\Employee\Events\AttemptToAuthenticate;
-use Modules\Employee\Events\EmploymentFormAuthenticated;
 use Modules\Employee\Events\EmploymentFormCreated;
-use Modules\Employee\Listeners\AuthenticateEmploymentForm;
 use Modules\Employee\Listeners\SendEmploymentFormLinkSms;
-use Modules\Employee\Listeners\SendEmploymentFormToken;
 
 class EventServiceProvider extends ServiceProvider
 {
@@ -19,8 +15,6 @@ class EventServiceProvider extends ServiceProvider
 	 */
 	protected $listen = [
 		EmploymentFormCreated::class => [SendEmploymentFormLinkSms::class],
-		AttemptToAuthenticate::class => [SendEmploymentFormToken::class],
-    EmploymentFormAuthenticated::class => [AuthenticateEmploymentForm::class],
 	];
 
 	/**

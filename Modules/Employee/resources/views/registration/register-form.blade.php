@@ -476,19 +476,19 @@
               <td>
                 <select v-model="language.conversation" class="form-control">
                   <option value="" disabled>انتخاب سطح</option>
-                  <option v-for="status in languageSkillsStatus" :value="status.name" v-text="status.label"></option>
+                  <option v-for="status in languageSkillsStatuses" :value="status.name" v-text="status.label"></option>
                 </select>
               </td>
               <td>
                 <select v-model="language.reading" class="form-control">
                   <option value="" disabled>انتخاب سطح</option>
-                  <option v-for="status in languageSkillsStatus" :value="status.name" v-text="status.label"></option>
+                  <option v-for="status in languageSkillsStatuses" :value="status.name" v-text="status.label"></option>
                 </select>
               </td>
               <td>
                 <select v-model="language.writing" class="form-control">
                   <option value="" disabled>انتخاب سطح</option>
-                  <option v-for="status in languageSkillsStatus" :value="status.name" v-text="status.label"></option>
+                  <option v-for="status in languageSkillsStatuses" :value="status.name" v-text="status.label"></option>
                 </select>
               </td>
               <td>
@@ -567,13 +567,16 @@
       'multiselect': window['vue-multiselect'].default,
       'date-picker': Vue3PersianDatetimePicker,
     },
+    mounted() {
+      console.log(12222222);
+    },
     data() {
       return {
         residenceStatuses: @json($residenceStatuses),
         militaryStatuses: @json($militaryStatuses),
         carTypes: @json($carTypes),
         driverLicenseTypes: @json($driverLicenseTypes),
-        languageSkillsStatus: @json($languageSkillsStatus),
+        languageSkillsStatuses: @json($languageSkillsStatuses),
         employee: {
           first_name: '',
           last_name: '',

@@ -2,11 +2,12 @@
 
 namespace Modules\Employee\Enums;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
+use Modules\Core\Traits\HasCasesWithLabel;
 
 enum EmploymentFormStatus: string
 {
+  use HasCasesWithLabel;
+
   case CONFIRMED = 'confirmed';
   case REJECTED = 'rejected';
   case AWAITING_REVIEW = 'awaiting_review';
@@ -30,19 +31,5 @@ enum EmploymentFormStatus: string
       self::AWAITING_COMPLETION => 'primary',
       self::REJECTED => 'danger',
     };
-  }
-
-  public static function getCasesWithLabel(): array
-  {
-    return Cache::rememberForever(
-      'all_employment_form_statuses',
-      fn() => Arr::map(
-        self::cases(),
-        fn(self $status) => [
-          'name' => $status->value,
-          'label' => $status->label()
-        ]
-      )
-    );
   }
 }

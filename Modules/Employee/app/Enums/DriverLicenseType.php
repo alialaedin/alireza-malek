@@ -2,11 +2,12 @@
 
 namespace Modules\Employee\Enums;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
+use Modules\Core\Traits\HasCasesWithLabel;
 
 enum DriverLicenseType: string
 {
+  use HasCasesWithLabel;
+  
   case BASE_1 = 'base_1';
   case BASE_2 = 'base_2';
   case BASE_3 = 'base_3';
@@ -22,19 +23,5 @@ enum DriverLicenseType: string
       self::SPECIAL => 'ویژه',
       self::MOTORCYCLE => 'موتور سیکلت',
     };
-  }
-
-  public static function getCasesWithLabel(): array
-  {
-    return Cache::rememberForever(
-      'all_driver_license_types',
-      fn() => Arr::map(
-        self::cases(),
-        fn(self $type) => [
-          'name' => $type->value,
-          'label' => $type->label()
-        ]
-      )
-    );
   }
 }

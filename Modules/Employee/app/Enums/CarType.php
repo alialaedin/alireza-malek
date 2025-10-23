@@ -2,11 +2,12 @@
 
 namespace Modules\Employee\Enums;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
+use Modules\Core\Traits\HasCasesWithLabel;
 
 enum CarType: string
 {
+  use HasCasesWithLabel;
+
   case MICRO = 'micro';
   case HATCHBACK = 'hatchback';
   case CROSSOVER = 'crossover';
@@ -32,19 +33,5 @@ enum CarType: string
       self::CABRIOLET => 'بدون سقف',
       self::LIMOUSINE => 'لیموزین',
     };
-  }
-
-  public static function getCasesWithLabel(): array
-  {
-    return Cache::rememberForever(
-      'all_car_types',
-      fn() => Arr::map(
-        self::cases(),
-        fn(self $type) => [
-          'name' => $type->value,
-          'label' => $type->label()
-        ]
-      )
-    );
   }
 }

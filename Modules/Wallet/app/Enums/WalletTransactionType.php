@@ -2,11 +2,12 @@
 
 namespace Modules\Wallet\Enums;
 
-use Illuminate\Support\Arr;
-use Illuminate\Support\Facades\Cache;
+use Modules\Core\Traits\HasCasesWithLabel;
 
 enum WalletTransactionType: string
 {
+  use HasCasesWithLabel;
+
   case DEPOSIT = "deposit";
   case WITHDRAW = "withdraw";
 
@@ -26,15 +27,4 @@ enum WalletTransactionType: string
     };
   }
 
-  public static function getCasesWithLabel()
-  {
-    return Cache::rememberForever('all_wallet_tra_types', function () {
-      return Arr::map(self::cases(), function (self $typo) {
-        return [
-          'name' => $typo->value,
-          'label' => $typo->label()
-        ];
-      });
-    });
-  }
 }

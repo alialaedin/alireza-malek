@@ -41,7 +41,7 @@ trait BelongsToCompany
   protected function companyName(): Attribute
   {
     return Attribute::make(
-      get: fn(): string => optional($this->company)->getName() ?? ''
+      get: fn(): string => optional($this->company)->name ?? ''
     );
   }
 }

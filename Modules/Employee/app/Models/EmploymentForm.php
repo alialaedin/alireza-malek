@@ -15,12 +15,20 @@ class EmploymentForm extends BaseModel
 {
 	use BelongsToCompany, HasBooleanStatus, Filterable;
 
-  protected $fillable = ['first_name', 'last_name', 'mobile', 'has_seen', 'is_filled', 'is_authenticated', 'company_id', 'status',
-    'employment_form_id',
-    'token',
-    'expired_at',
-    'verified_at'
-  ];
+	protected $fillable = [
+		'first_name',
+		'last_name',
+		'mobile',
+		'has_seen',
+		'is_filled',
+		'is_authenticated',
+		'company_id',
+		'status',
+		'employment_form_id',
+		'token',
+		'expired_at',
+		'verified_at'
+	];
 	protected $appends = ['full_name'];
 	protected $casts = ['status' => EmploymentFormStatus::class];
 
@@ -30,7 +38,7 @@ class EmploymentForm extends BaseModel
 		'is_authenticated' => 0,
 		'status' => EmploymentFormStatus::AWAITING_COMPLETION
 	];
-	protected static array $filterColumns = [
+	protected static $filterColumns = [
 		'first_name',
 		'last_name',
 		'mobile',

@@ -59,7 +59,7 @@
                   <div class="p-4 pt-6 text-center">
                     <p class="mb-2 fs-24">احراز هویت</p>
                   </div>
-                  <form class="card-body pt-1"
+                  <form id="authenticate-form" class="card-body pt-1"
                     action="{{ route('employee.registration.authenticate', $employmentForm) }}" method="POST">
                     @csrf
                     <div class="form-group">
@@ -68,7 +68,7 @@
                       <input hidden name="mobile" :value="mobile">
                     </div>
                     <div class="submit">
-                      <button type="submit" :disabled="isSubmitBtnDisabled" @click="isSubmitBtnDisabled = true"
+                      <button type="button" :disabled="isSubmitBtnDisabled" @click="authenticate"
                         class="btn btn-primary btn-block">ثبت</button>
                     </div>
                   </form>
@@ -183,7 +183,11 @@
           }
 
         },
-      },
+        authenticate() {
+          this.isSubmitBtnDisabled = true;
+          document.getElementById('authenticate-form').submit();
+        }
+      }
     }).mount("#app");
 
   </script>
