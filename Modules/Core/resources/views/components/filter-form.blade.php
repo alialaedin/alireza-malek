@@ -88,7 +88,7 @@
   </form>
 </x-card>
 
-@push('filter-form-scripts')
+@push('scripts')
   <script>
     document.addEventListener('DOMContentLoaded', function () {
       @foreach($inputs as $input => $options)

@@ -4,17 +4,22 @@ namespace Modules\Employee\Http\Controllers\Employee;
 
 use App\Http\Controllers\Controller;
 use Flasher\Toastr\Laravel\Facade\Toastr;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Modules\Area\Models\City;
+use Modules\Area\Models\Province;
 use Modules\Employee\Enums\CarType;
 use Modules\Employee\Enums\DriverLicenseType;
-use Modules\Employee\Enums\EmploymentFormStatus;
 use Modules\Employee\Enums\LanguageSkillsStatus;
 use Modules\Employee\Enums\MilitaryStatus;
 use Modules\Employee\Enums\ResidenceStatus;
 use Modules\Employee\Http\Requests\Registeration\AuthenticateEmploymentFormRequest;
+use Modules\Employee\Http\Requests\Registeration\RegisterRequest;
 use Modules\Employee\Http\Requests\Registeration\SendAuthenticationSmsRequest;
 use Modules\Employee\Models\EmploymentForm;
 use Modules\Employee\Services\EmploymentFormRegisterationService;
+use Modules\Language\Models\Language;
+use Modules\Relation\Models\Relation;
 
 class EmploymentFormController extends Controller
 {
@@ -30,9 +35,7 @@ class EmploymentFormController extends Controller
   public function sendAuthenticationToken(SendAuthenticationSmsRequest $request, EmploymentForm $employmentForm)
   {
     try {
-
-      $service = new EmploymentFormRegisterationService($employmentForm);
-      $service->sendAuthenticationToken();
+      (new EmploymentFormRegisterationService($employmentForm))->sendAuthenticationToken();
 
       Toastr::success('کد ورود با موفقیت ارسال شد');
     } catch (\Exception $exception) {
@@ -51,8 +54,7 @@ class EmploymentFormController extends Controller
 
   public function authenticate(AuthenticateEmploymentFormRequest $request, EmploymentForm $employmentForm)
   {
-    $service = new EmploymentFormRegisterationService($employmentForm);
-    $service->authenticate();
+    (new EmploymentFormRegisterationService($employmentForm))->authenticate();
 
     Toastr::success('با موفقیت احراز هویت شدید. لطفا اطلاعات خود را کامل کنید');
 
@@ -67,8 +69,7 @@ class EmploymentFormController extends Controller
 
     abort_if($employmentForm->is_filled, 404);
 
-    $service = new EmploymentFormRegisterationService($employmentForm);
-    $service->wasSeen();
+    (new EmploymentFormRegisterationService($employmentForm))->wasSeen();
 
     $carTypes = CarType::getCasesWithLabel();
     $driverLicenseTypes = DriverLicenseType::getCasesWithLabel();
@@ -76,13 +77,46 @@ class EmploymentFormController extends Controller
     $militaryStatuses = MilitaryStatus::getCasesWithLabel();
     $residenceStatuses = ResidenceStatus::getCasesWithLabel();
 
+    $provinces = Province::getAll();
+    $cities = City::getAllActive();
+    $languages = Language::getAll(true);
+    $relations = Relation::getByCompanyId($employmentForm->company_id);
+
     return view('employee::registration.register-form', compact([
       'employmentForm',
       'carTypes',
       'driverLicenseTypes',
       'languageSkillsStatuses',
       'militaryStatuses',
-      'residenceStatuses'
+      'residenceStatuses',
+      'provinces',
+      'cities',
+      'languages',
+      'relations'
     ]));
+  }
+
+  public function register(RegisterRequest $request, EmploymentForm $employmentForm)
+  {
+    try {
+      DB::beginTransaction();
+
+      $service = new EmploymentFormRegisterationService($employmentForm);
+      $service->register($request);
+      
+      DB::commit();
+    } catch (\Exception $exception) {
+
+      DB::rollBack();
+      Log::error($exception->getTraceAsString());
+
+      return response()->error(
+        'مشکلی در برنامه بوجود آمده است. لطفا با پشتیبانی تماس بگیرید: ' . $exception->getMessage(),
+        $exception->getTrace(),
+        422
+      );
+    }
+
+    return response()->success('اطلاعات شما با موفقیت سمت شرکت ارسال شد');
   }
 }

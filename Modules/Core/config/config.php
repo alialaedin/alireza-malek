@@ -94,6 +94,16 @@ return [
       ],
       'operator' => '=',
     ],
+    'can_login' => [
+      'column' => 'can_login',
+      'type' => 'select',
+      'placeholder' => 'وضعیت لاگین را انتخاب کنید',
+      'options' => [
+        'on' => 'فعال',
+        'off' => 'غیرفعال',
+      ],
+      'operator' => '=',
+    ],
     'discount_type' => [
       'column' => 'discount_type',
       'type' => 'select',

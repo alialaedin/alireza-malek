@@ -2,12 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use Modules\Auth\Enums\GuardName;
+use Modules\Employee\Http\Controllers\Company\EmployeeController;
 use Modules\Employee\Http\Controllers\Company\EmploymentFormController as CompanyEmploymentFormController;
 use Modules\Employee\Http\Controllers\Employee\EmploymentFormController as EmployeeEmploymentFormController;
 
 Route::superGroup(GuardName::COMPANY, function () {
-	Route::resource('/employment-forms', CompanyEmploymentFormController::class)
-		->except('create', 'edit', 'update', 'show');
+	Route::resource('/employees', EmployeeController::class);
+	Route::resource('/employment-forms', CompanyEmploymentFormController::class)->only('index', 'store', 'destroy');
 });
 
 Route::prefix('/register-employee/{employmentForm}')->name('employee.registration.')->group(function () {

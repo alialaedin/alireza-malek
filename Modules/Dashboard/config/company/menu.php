@@ -49,11 +49,11 @@ return [
     'icon' => 'ti-clipboard',
     'route' => 'company.employment-forms.index'
   ],
-  // [
-  //   'title' => 'کارمندان',
-  //   'icon' => 'fe fe-users',
-  //   'route' => 'company.price-lists.index'
-  // ],
+  [
+    'title' => 'کارمندان',
+    'icon' => 'fe fe-users',
+    'route' => 'company.employees.index'
+  ],
   // [
   //   'title' => 'قرارداد ها',
   //   'icon' => 'ti-files',

@@ -24,4 +24,11 @@ class EmploymentFormController extends Controller
 
 		return redirect()->back()->with('status', 'لینک فرم با موفقیت ارسال شد');
 	}
+
+	public function destroy(EmploymentForm $employment)
+	{
+		$employment->delete();
+
+		return redirect()->back()->with('status', 'لینک فرم با موفقیت حذف شد');
+	}
 }

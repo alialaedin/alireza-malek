@@ -5,6 +5,10 @@ namespace Modules\Employee\Services;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Log;
 use Modules\Core\Helpers\Helpers;
+use Modules\Employee\Enums\EmploymentFormStatus;
+use Modules\Employee\Http\Requests\Registeration\RegisterRequest;
+use Modules\Employee\Models\Employee;
+use Modules\Employee\Models\EmployeeProfile;
 use Modules\Employee\Models\EmploymentForm;
 use Modules\Sms\Sms;
 
@@ -49,5 +53,27 @@ class EmploymentFormRegisterationService
 	{
 		$this->employmentForm->has_seen = 1;
 		$this->employmentForm->save();
+	}
+
+	public function register(RegisterRequest $registerRequest)
+	{
+		$employeeFillable = (new Employee())->getFillable();
+		$employeeRequestInputs = $registerRequest->only($employeeFillable);
+		$employee = Employee::query()->create($employeeRequestInputs);
+
+		$employee->educationCertificates()->insert($registerRequest->input('education_certificates') ?? []);
+		$employee->experiences()->insert($registerRequest->input('experiences') ?? []);
+		$employee->languageSkills()->insert($registerRequest->input('language_skills') ?? []);
+		$employee->referencePeople()->insert($registerRequest->input('reference_people') ?? []);
+
+		$profileFillable = (new EmployeeProfile())->getFillable();
+		$profileRequestInputs = $registerRequest->only($profileFillable);
+
+		$employee->profile()->create($profileRequestInputs);
+
+		$this->employmentForm->update([
+			'is_filled' => 1,
+			'status' => EmploymentFormStatus::AWAITING_REVIEW
+		]);
 	}
 }

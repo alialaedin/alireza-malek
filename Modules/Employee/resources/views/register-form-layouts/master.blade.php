@@ -62,27 +62,27 @@
     <script src="{{asset('assets/plugins/bootstrap/popper.min.js')}}"></script>
     <script src="{{asset('assets/plugins/bootstrap/js/bootstrap.min.js')}}"></script>
     <script src="{{asset('assets/plugins/sidemenu/sidemenu.js')}}"></script>
-    <script src="{{asset('assets/plugins/p-scrollbar/p-scrollbar.js')}}"></script>
-    <script src="{{asset('assets/plugins/p-scrollbar/p-scroll1.js')}}"></script>
-    <script src="{{asset('assets/plugins/sidebar/sidebar.js')}}"></script>
+    {{-- <script src="{{asset('assets/plugins/p-scrollbar/p-scrollbar.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/plugins/p-scrollbar/p-scroll1.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/plugins/sidebar/sidebar.js')}}"></script> --}}
     <script src="{{asset('assets/plugins/select2/select2.full.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/peitychart/jquery.peity.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/vertical-scroll/vertical-scroll.js')}}"></script>
-    <script src="{{asset('assets/plugins/date-picker/jquery-ui.js')}}"></script>
-    <script src="{{asset('assets/plugins/time-picker/jquery.timepicker.js')}}"></script>
-    <script src="{{asset('assets/plugins/time-picker/toggles.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/jQuery-countdowntimer/jQuery.countdownTimer.js')}}"></script>
+    {{-- <script src="{{asset('assets/plugins/peitychart/jquery.peity.min.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/plugins/vertical-scroll/vertical-scroll.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/plugins/date-picker/jquery-ui.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/plugins/time-picker/jquery.timepicker.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/plugins/time-picker/toggles.min.js')}}"></script> --}}
+    {{-- <script src="{{asset('assets/plugins/jQuery-countdowntimer/jQuery.countdownTimer.js')}}"></script> --}}
     <script src="{{asset('assets/js/index1.js')}}"></script>
     <script src="{{asset('assets/js/custom.js')}}"></script>
-    <script src="{{asset('assets/PersianDateTimePicker-bs4/src/jquery.md.bootstrap.datetimepicker.js') }}"></script>
-    <script src="{{asset('assets/select2/dist/js/select2.min.js')}}"></script>
+    {{-- <script src="{{asset('assets/PersianDateTimePicker-bs4/src/jquery.md.bootstrap.datetimepicker.js') }}"></script> --}}
+    {{-- <script src="{{asset('assets/select2/dist/js/select2.min.js')}}"></script> --}}
     <script src="{{asset('assets/custom/custom.js')}}"></script>
     <script src="{{asset('assets/vue/vue3/vue.global.prod.js')}}"></script>
     <script src="{{asset('assets/sweetalert2/sweetalert2.js')}}"></script>
     <script src="{{asset('assets/vue/multiselect/vue-multiselect.umd.min.js') }}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
-    <script src="https://cdn.jsdelivr.net/npm/moment-jalaali@0.9.2/build/moment-jalaali.js"></script>
-    <script src="{{ asset('assets/vue/date-time-picker/vue3-persian-datetime-picker.umd.min.js') }}"></script>
+    <script src="{{asset('assets/vue/moment/moment.js') }}"></script>
+    <script src="{{asset('assets/vue/moment/moment-jalaali.js') }}"></script>
+    <script src="{{asset('assets/vue/date-time-picker/vue3-persian-datetime-picker.umd.min.js') }}"></script>
 
     @yield('scripts')
 

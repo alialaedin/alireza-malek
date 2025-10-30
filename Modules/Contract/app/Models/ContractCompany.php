@@ -22,7 +22,7 @@ class ContractCompany extends BaseMediaModel
 
   protected $fillable = [
     'company_id',
-    // 'campaign_id',
+    'campaign_id',
     'contract_number',
     'subject',
     'start_date',

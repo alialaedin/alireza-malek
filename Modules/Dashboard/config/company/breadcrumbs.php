@@ -111,4 +111,18 @@ return [
       ['title' => 'فرم های استخدام']
     ],
   ],
+
+  'employees' => [
+    'index' => [
+      ['title' => 'کارمندان']
+    ],
+    'create' => [
+      ['title' => 'کارمندان', 'route' => 'company.employees.index'],
+      ['title' => 'ثبت کارمند جدید'],
+    ],
+    'edit' => [
+      ['title' => 'کارمندان', 'route' => 'company.employees.index'],
+      ['title' => 'ویرایش کارمند'],
+    ],
+  ],
 ];
