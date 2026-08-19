@@ -30,11 +30,14 @@ return new class extends Migration
 
 	private static function createFirstAdmin(): void
 	{
+		// The Admin model's `password` mutator already bcrypts the value on set,
+		// so the plain password is passed here to avoid double hashing (which
+		// would make the seeded credentials impossible to authenticate with).
 		Admin::create([
 			'name' => 'علی علاالدین',
 			'username' => 'admin',
 			'email' => 'admin@gmail.com',
-			'password' => bcrypt(123456),
+			'password' => '123456',
 			'mobile' => '09368917169'
 		]);
 	}
